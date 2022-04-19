@@ -3,7 +3,7 @@ import HomePage from "./Pages/HomePage";
 
 const routes = [
   { path: "/cart", component: CartPage },
-  { path: "/", component: HomePage, exact: true },
+  { path: "/", component: HomePage },
 ];
 
 export default routes;

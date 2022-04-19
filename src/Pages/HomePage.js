@@ -1,16 +1,19 @@
 import * as data from "../data";
 import Product from "../Components/Product";
-
-const addProductHandler = (product) => {
-  console.log(product);
-};
+import { useCartActions } from "../Context/Cart/CartProvider";
 
 const HomePage = () => {
+  const dispatch = useCartActions();
+
+  const addProductHandler = (product) => {
+    dispatch({ type: "ADD_TO_CART", payload: product });
+  };
+
   return (
     <section className="productList">
       {data.products.map((product) => (
         <Product
-          key={product.image}
+          key={product.id}
           product={product}
           addProductHandler={addProductHandler}
         />

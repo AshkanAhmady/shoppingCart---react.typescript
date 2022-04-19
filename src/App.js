@@ -5,15 +5,15 @@ import routes from "./routes";
 
 function App() {
   return (
-    <CartProvider>
-      <Layout>
+    <Layout>
+      <CartProvider>
         <Switch>
           {routes.map((route, index) => (
             <Route key={index} {...route} />
           ))}
         </Switch>
-      </Layout>
-    </CartProvider>
+      </CartProvider>
+    </Layout>
   );
 }
 
