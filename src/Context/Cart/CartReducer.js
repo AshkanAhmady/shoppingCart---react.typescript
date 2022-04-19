@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TO_CART": {
@@ -10,6 +12,7 @@ const cartReducer = (state, action) => {
       if (updatedItemIndex < 0) {
         // add quantity to object
         updatedCart.push({ ...action.payload, quantity: 1 });
+        toast.success(`${action.payload.name} added to cart`);
         return {
           ...state,
           cart: updatedCart,
@@ -20,6 +23,7 @@ const cartReducer = (state, action) => {
         let updatedItem = updatedCart[updatedItemIndex];
         updatedItem.quantity++;
         updatedCart[updatedItemIndex] = updatedItem;
+        toast.success(`${action.payload.name} added to cart (AGAIN)`);
         return {
           ...state,
           cart: updatedCart,
