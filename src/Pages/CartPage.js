@@ -3,7 +3,7 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { HiPlusSm, HiMinusSm, HiOutlineTrash } from "react-icons/hi";
 
 const CartPage = () => {
-  const { cart } = useCart();
+  const { cart, total } = useCart();
   const dispatch = useCartActions();
 
   const incrementHandler = (id) => {
@@ -60,7 +60,10 @@ const CartPage = () => {
           </div>
         ))}
       </article>
-      <aside>summery</aside>
+      <aside>
+        <h1>total:</h1>
+        <span>{total}</span>
+      </aside>
     </section>
   );
 };
