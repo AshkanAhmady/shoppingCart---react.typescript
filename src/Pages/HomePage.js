@@ -1,5 +1,22 @@
+import * as data from "../data";
+import Product from "../Components/Product";
+
+const addProductHandler = (product) => {
+  console.log(product);
+};
+
 const HomePage = () => {
-  return <h1>Home Page</h1>;
+  return (
+    <section className="productList">
+      {data.products.map((product) => (
+        <Product
+          key={product.image}
+          product={product}
+          addProductHandler={addProductHandler}
+        />
+      ))}
+    </section>
+  );
 };
 
 export default HomePage;

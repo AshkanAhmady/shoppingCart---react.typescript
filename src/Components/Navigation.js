@@ -1,17 +1,37 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
+import {
+  RiShoppingCartLine,
+  RiHomeLine,
+  RiHomeFill,
+  RiShoppingCartFill,
+} from "react-icons/ri";
 
-const Navigation = () => {
+const Navigation = ({ location }) => {
   return (
     <header>
+      <div className="logo">
+        <div></div>
+        <h1>Shopping App</h1>
+      </div>
       <nav>
         <ul>
           <li>
             <NavLink to="/" exact={true}>
-              Home
+              {location.pathname == "/" ? (
+                <RiHomeFill className="icon" />
+              ) : (
+                <RiHomeLine className="icon" />
+              )}
             </NavLink>
           </li>
           <li>
-            <NavLink to="/cart">cart</NavLink>
+            <NavLink to="/cart">
+              {location.pathname == "/cart" ? (
+                <RiShoppingCartFill className="icon" />
+              ) : (
+                <RiShoppingCartLine className="icon" />
+              )}
+            </NavLink>
           </li>
         </ul>
       </nav>
@@ -19,4 +39,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default withRouter(Navigation);
