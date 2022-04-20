@@ -27,7 +27,7 @@ const CartPage = () => {
               <div>
                 <img src={item.image} />
                 <h1>{item.name}</h1>
-                <span>${item.price}</span>
+                <span>${item.price * item.quantity}</span>
               </div>
 
               <div className="quantity">
@@ -60,12 +60,41 @@ const CartPage = () => {
           </div>
         ))}
       </article>
-      <aside>
-        <h1>total:</h1>
-        <span>{total}</span>
-      </aside>
+      <CartSummery cart={cart} total={total} />
     </section>
   );
 };
 
 export default CartPage;
+
+const CartSummery = ({ total, cart }) => {
+  const originalPrice = cart.length
+    ? cart.reduce(
+        // accumulator => save preve data in itself
+        // current => the current member of array that progress
+        (accumulator, current) =>
+          accumulator + current.quantity * current.price,
+        // 0 => is first value of accumulator
+        0
+      )
+    : 0;
+
+  return (
+    <aside>
+      <h1>Cart Summery:</h1>
+      <div>
+        <h3>Original Total Price:</h3>
+        <span>${originalPrice}</span>
+      </div>
+      <div>
+        <h3>Cart Discount:</h3>
+        <span>${originalPrice - total}</span>
+      </div>
+      <hr />
+      <div>
+        <h3>Net Price:</h3>
+        <span>${total}</span>
+      </div>
+    </aside>
+  );
+};

@@ -16,7 +16,7 @@ const cartReducer = (state, action) => {
         return {
           ...state,
           cart: updatedCart,
-          total: state.total + action.payload.price,
+          total: state.total + action.payload.offPrice,
         };
       } else {
         // increment quantity of product
@@ -27,7 +27,7 @@ const cartReducer = (state, action) => {
         return {
           ...state,
           cart: updatedCart,
-          total: state.total + action.payload.price,
+          total: state.total + action.payload.offPrice,
         };
       }
     }
@@ -42,7 +42,7 @@ const cartReducer = (state, action) => {
       return {
         ...state,
         cart: updatedCart,
-        total: state.total + updatedItem.price,
+        total: state.total + updatedItem.offPrice,
       };
     }
     case "DECREMENT_QUANTITY": {
@@ -58,13 +58,13 @@ const cartReducer = (state, action) => {
         return {
           ...state,
           cart: updatedCart,
-          total: state.total - updatedItem.price,
+          total: state.total - updatedItem.offPrice,
         };
       } else {
         return {
           ...state,
           cart: updatedCart,
-          total: state.total - updatedItem.price,
+          total: state.total - updatedItem.offPrice,
         };
       }
     }
