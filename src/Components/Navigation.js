@@ -5,6 +5,10 @@ import {
   RiHomeLine,
   RiHomeFill,
   RiShoppingCartFill,
+  RiUser3Line,
+  RiUser3Fill,
+  RiLoginBoxLine,
+  RiLoginBoxFill,
 } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { UseAuth } from "../Context/Auth/AuthProvider";
@@ -47,7 +51,18 @@ const Navigation = ({ location }) => {
           </li>
           <li>
             <Link to={auth ? "/profile" : "/signup"}>
-              {auth ? "profile" : "login/signup"}
+              {auth ? (
+                location.pathname == "/profile" ? (
+                  <RiUser3Fill className="icon" />
+                ) : (
+                  <RiUser3Line className="icon" />
+                )
+              ) : location.pathname == "/login" ||
+                location.pathname == "/signup" ? (
+                <RiLoginBoxFill className="icon" />
+              ) : (
+                <RiLoginBoxLine className="icon" />
+              )}
             </Link>
           </li>
         </ul>

@@ -10,7 +10,7 @@ const HomePage = () => {
   };
 
   return (
-    <section className="productList">
+    <div className="productList">
       {data.products.map((product) => (
         <Product
           key={product.id}
@@ -18,7 +18,7 @@ const HomePage = () => {
           addProductHandler={addProductHandler}
         />
       ))}
-    </section>
+    </div>
   );
 };
 

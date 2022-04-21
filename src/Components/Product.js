@@ -5,6 +5,9 @@ import { checkInCart } from "../Util/checkInCart";
 
 const Product = ({ product, addProductHandler }) => {
   const { cart } = useCart();
+  const discount = Math.round(
+    (100 * (product.price - product.offPrice)) / product.price
+  );
 
   return (
     <div className="product">
@@ -13,16 +16,27 @@ const Product = ({ product, addProductHandler }) => {
           Continue ordering
         </Link>
       ) : (
-        <HiPlusSm
-          onClick={() => addProductHandler(product)}
-          className="addToCard"
-        />
+        <span onClick={() => addProductHandler(product)} className="addToCard">
+          Add To Cart
+        </span>
       )}
 
-      <img src={product.image} />
+      <div className="imgBox">
+        <img src={product.image} />
+      </div>
+      {discount > 0 && <span className="discount">{discount}% off</span>}
       <div className="details">
         <h3>{product.name}</h3>
-        <span>${product.price}</span>
+        <div className="price">
+          <div>
+            <span className={discount > 0 ? "notThisPrice" : ""}>
+              ${product.price}
+            </span>
+            {discount > 0 && (
+              <span className="offPrice">${product.offPrice}</span>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
