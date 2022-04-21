@@ -3,7 +3,9 @@ import Input from "../Components/Common/Input";
 import * as yup from "yup";
 import { Link, withRouter } from "react-router-dom";
 import { loginUser } from "../Services/HttpRequestMethods";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { UseAuth, useAuthActions } from "../Context/Auth/AuthProvider";
+import { useQuery } from "../hooks/useQuery";
 
 const initialValues = {
   email: "",
@@ -11,12 +13,25 @@ const initialValues = {
 };
 
 const LoginForm = ({ history }) => {
+  // use query => if user was in checkoutPage and dont loged in
+  // he|she most login and redirect to checkoutPage
+  const query = useQuery();
+  const redirect = query.get("redirect") || "/";
   const [error, setError] = useState(null);
+  const setAuth = useAuthActions();
+  const auth = UseAuth();
+
+  // if we come to loginPage and we loged in, we push to redirect
+  useEffect(() => {
+    if (auth) history.push(redirect);
+  }, [redirect, auth]);
+
   const onSubmit = async (values) => {
     try {
       const { data } = await loginUser(values);
+      setAuth(data);
       setError(null);
-      history.push("/");
+      history.push(redirect);
     } catch (error) {
       if (error.response && error.response.data.message) {
         setError(error.response.data.message);
@@ -54,7 +69,7 @@ const LoginForm = ({ history }) => {
           Login
         </button>
         {error && <p>{error}</p>}
-        <Link to="/signup">Not Signup Yet?</Link>
+        <Link to={`/signup?redirect=${redirect}`}>Not Signup Yet?</Link>
       </form>
     </div>
   );

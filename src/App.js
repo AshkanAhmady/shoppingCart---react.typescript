@@ -4,20 +4,23 @@ import Layout from "./Layout/Layout";
 import routes from "./routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AuthProvider from "./Context/Auth/AuthProvider";
 
 function App() {
   return (
     <>
       <ToastContainer />
-      <CartProvider>
-        <Layout>
-          <Switch>
-            {routes.map((route, index) => (
-              <Route key={index} {...route} />
-            ))}
-          </Switch>
-        </Layout>
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <Layout>
+            <Switch>
+              {routes.map((route, index) => (
+                <Route key={index} {...route} />
+              ))}
+            </Switch>
+          </Layout>
+        </CartProvider>
+      </AuthProvider>
     </>
   );
 }

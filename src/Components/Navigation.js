@@ -6,8 +6,12 @@ import {
   RiHomeFill,
   RiShoppingCartFill,
 } from "react-icons/ri";
+import { Link } from "react-router-dom";
+import { UseAuth } from "../Context/Auth/AuthProvider";
 
 const Navigation = ({ location }) => {
+  const auth = UseAuth();
+
   const { cart } = useCart();
 
   return (
@@ -40,6 +44,11 @@ const Navigation = ({ location }) => {
                 <span>{cart.length}</span>
               </div>
             )}
+          </li>
+          <li>
+            <Link to={auth ? "/profile" : "/signup"}>
+              {auth ? "profile" : "login/signup"}
+            </Link>
           </li>
         </ul>
       </nav>

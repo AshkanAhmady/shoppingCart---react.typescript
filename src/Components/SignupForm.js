@@ -3,7 +3,9 @@ import Input from "../Components/Common/Input";
 import * as yup from "yup";
 import { Link, withRouter } from "react-router-dom";
 import { signupUser } from "../Services/HttpRequestMethods";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { UseAuth, useAuthActions } from "../Context/Auth/AuthProvider";
+import { useQuery } from "../hooks/useQuery";
 
 const initialValues = {
   name: "",
@@ -14,7 +16,19 @@ const initialValues = {
 };
 
 const SignupForm = ({ history }) => {
+  // use query => if user was in checkoutPage and dont loged in
+  // he|she most login and redirect to checkoutPage
+  // if (query == undefinde) => redirect = "/"
+  const query = useQuery();
+  const redirect = query.get("redirect") || "/";
   const [error, setError] = useState(null);
+  const setAuth = useAuthActions();
+  const auth = UseAuth();
+
+  // if we come to signupPage and we loged in, we push to redirect
+  useEffect(() => {
+    if (auth) history.push(redirect);
+  }, [redirect, auth]);
 
   const onSubmit = async (values) => {
     const { name, email, phoneNumber, password } = values;
@@ -27,7 +41,8 @@ const SignupForm = ({ history }) => {
 
     try {
       const { data } = await signupUser(userDate);
-      history.push("/");
+      setAuth(data);
+      history.push(redirect);
       setError(null);
     } catch (error) {
       if (error.response && error.response.data.message) {
@@ -97,7 +112,7 @@ const SignupForm = ({ history }) => {
           SignUp
         </button>
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <Link to="/login">Alredy login?</Link>
+        <Link to={`/login?redirect=${redirect}`}>Alredy login?</Link>
       </form>
     </div>
   );

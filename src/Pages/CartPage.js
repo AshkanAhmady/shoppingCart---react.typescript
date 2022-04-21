@@ -96,7 +96,7 @@ const CartSummery = ({ total, cart }) => {
         <h3>Net Price:</h3>
         <span>${total}</span>
       </div>
-      <Link to="/checkout" className="checkoutBtn">
+      <Link to="/signup?redirect=checkout" className="checkoutBtn">
         Go To Checkout
       </Link>
     </aside>
