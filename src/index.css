@@ -189,9 +189,11 @@ header nav ul li .number span {
 
 .cart article {
   width: 70%;
-  height: calc(100vh - 200px);
+  max-height: calc(100vh - 200px);
   overflow-y: scroll;
-  padding-right: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
 .cart article .singleProduct:last-child hr {
@@ -326,4 +328,16 @@ header nav ul li .number span {
 
 .cart aside > div:first-of-type {
   margin-top: 30px;
+}
+
+.cart aside a.checkoutBtn {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #fff;
+  background-color: blueviolet;
+  width: 100%;
+  border-radius: 5px;
+  padding: 5px;
 }

@@ -1,6 +1,7 @@
 import { useCart, useCartActions } from "../Context/Cart/CartProvider";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { HiPlusSm, HiMinusSm, HiOutlineTrash } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const CartPage = () => {
   const { cart, total } = useCart();
@@ -95,6 +96,9 @@ const CartSummery = ({ total, cart }) => {
         <h3>Net Price:</h3>
         <span>${total}</span>
       </div>
+      <Link to="/checkout" className="checkoutBtn">
+        Go To Checkout
+      </Link>
     </aside>
   );
 };
