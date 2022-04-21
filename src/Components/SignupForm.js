@@ -1,6 +1,9 @@
 import { useFormik } from "formik";
 import Input from "../Components/Common/Input";
 import * as yup from "yup";
+import { Link, withRouter } from "react-router-dom";
+import { signupUser } from "../Services/HttpRequestMethods";
+import { useState } from "react";
 
 const initialValues = {
   name: "",
@@ -10,9 +13,27 @@ const initialValues = {
   confirmPassword: "",
 };
 
-const SignupForm = () => {
-  const onSubmit = (values) => {
-    console.log(values);
+const SignupForm = ({ history }) => {
+  const [error, setError] = useState(null);
+
+  const onSubmit = async (values) => {
+    const { name, email, phoneNumber, password } = values;
+    const userDate = {
+      name,
+      email,
+      phoneNumber,
+      password,
+    };
+
+    try {
+      const { data } = await signupUser(userDate);
+      history.push("/");
+      setError(null);
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      }
+    }
   };
 
   const validationSchema = yup.object({
@@ -31,11 +52,11 @@ const SignupForm = () => {
     password: yup
       .string()
       .min(8, "password at least must be 8 character")
-      .required("password is required")
-      .matches(
-        /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/,
-        "Password is weak"
-      ),
+      .required("password is required"),
+    // .matches(
+    //   /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/,
+    //   "Password is weak"
+    // ),
     confirmPassword: yup
       .string()
       .oneOf([yup.ref("password"), null], "confirm password is not match"),
@@ -75,9 +96,11 @@ const SignupForm = () => {
         <button type="submit" disabled={!formik.isValid}>
           SignUp
         </button>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <Link to="/login">Alredy login?</Link>
       </form>
     </div>
   );
 };
 
-export default SignupForm;
+export default withRouter(SignupForm);

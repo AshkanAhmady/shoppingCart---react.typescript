@@ -1,35 +1,35 @@
 import { useFormik } from "formik";
 import Input from "../Components/Common/Input";
 import * as yup from "yup";
+import { Link, withRouter } from "react-router-dom";
+import { loginUser } from "../Services/HttpRequestMethods";
+import { useState } from "react";
 
 const initialValues = {
-  name: "",
   email: "",
   password: "",
 };
 
-const LoginForm = () => {
-  const onSubmit = (values) => {
-    console.log(values);
+const LoginForm = ({ history }) => {
+  const [error, setError] = useState(null);
+  const onSubmit = async (values) => {
+    try {
+      const { data } = await loginUser(values);
+      setError(null);
+      history.push("/");
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      }
+    }
   };
 
   const validationSchema = yup.object({
-    name: yup
-      .string()
-      .required("Name is required")
-      .min(3, "name must be more than 3 character"),
     email: yup
       .string()
       .email("email format is incorrect")
       .required("Email is required"),
-    password: yup
-      .string()
-      .min(8, "password at least must be 8 character")
-      .required("password is required")
-      .matches(
-        /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/,
-        "Password is weak"
-      ),
+    password: yup.string().required("password is required"),
   });
 
   const formik = useFormik({
@@ -41,9 +41,8 @@ const LoginForm = () => {
 
   return (
     <div className="signup_form">
-      <h1>SignUp</h1>
+      <h1>Login</h1>
       <form onSubmit={formik.handleSubmit}>
-        <Input formik={formik} label="Name" name="name" />
         <Input formik={formik} label="Email" name="email" type="email" />
         <Input
           formik={formik}
@@ -54,9 +53,11 @@ const LoginForm = () => {
         <button type="submit" disabled={!formik.isValid}>
           Login
         </button>
+        {error && <p>{error}</p>}
+        <Link to="/signup">Not Signup Yet?</Link>
       </form>
     </div>
   );
 };
 
-export default LoginForm;
+export default withRouter(LoginForm);
