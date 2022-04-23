@@ -69,7 +69,9 @@ const LoginForm = ({ history }) => {
           Login
         </button>
         {error && <p>{error}</p>}
-        <Link to={`/signup?redirect=${redirect}`}>Not Signup Yet?</Link>
+        <Link className="notSignUp" to={`/signup?redirect=${redirect}`}>
+          Not Signup Yet?
+        </Link>
       </form>
     </div>
   );

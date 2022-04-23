@@ -413,3 +413,152 @@ header nav ul li .number span {
   border-radius: 5px;
   padding: 5px;
 }
+
+/* checkout page */
+.checkout {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.checkout article {
+  width: 70%;
+  max-height: calc(100vh - 200px);
+  overflow-y: scroll;
+  padding: 20px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.checkout article h2 {
+  font-size: 1.5rem;
+}
+
+.checkout article > div {
+  width: 100%;
+  /* display: flex; */
+  justify-content: space-around;
+}
+
+.checkout article > div > div {
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.checkout article > div > div h4 {
+  font-size: 1.3rem;
+  margin: -3px 5px 0 0;
+}
+
+.checkout aside {
+  width: 28%;
+  max-height: calc(100vh - 200px);
+  padding: 20px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+h3.emptyCart {
+  width: 100%;
+  text-align: center;
+}
+.shoppingLink {
+  display: block;
+  text-align: center;
+  padding: 5px;
+  color: #fff;
+  background-color: blueviolet;
+  text-decoration: none;
+  margin: 10px 0;
+  width: 100%;
+}
+
+/* signUp */
+.signupBox,
+.loginBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.signup_form {
+  width: 70%;
+  background-color: #242424;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.signup_form .passBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.signup_form .passBox .formControll {
+  width: 48%;
+}
+
+.signup_form .formControll {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  color: #efefef;
+}
+
+.signup_form .formControll input {
+  width: 100%;
+  border: 1px solid #424242;
+  background-color: #424242;
+  padding: 7px 5px;
+  margin-top: 2px;
+  border-radius: 3px;
+  outline: none;
+}
+
+.signup_form .formControll input:focus {
+  border-color: #000;
+}
+
+.signup_form .formControll .error {
+  color: #ef4444;
+}
+
+.signup_form button {
+  border: none;
+  background-color: rgb(20, 20, 196);
+  color: #eee;
+  padding: 2px 20px;
+  border-radius: 3px;
+}
+
+.signup_form .haveAccount,
+.signup_form .notSignUp {
+  color: #efefef;
+  margin-left: 10px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.signup_form .haveAccount:hover,
+.signup_form .notSignUp:hover {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.signup_form h1 {
+  color: #efefef;
+  font-size: 1.7rem;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}

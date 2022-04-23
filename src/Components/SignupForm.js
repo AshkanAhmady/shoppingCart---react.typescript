@@ -96,23 +96,27 @@ const SignupForm = ({ history }) => {
           name="phoneNumber"
           type="phone"
         />
-        <Input
-          formik={formik}
-          label="Password"
-          name="password"
-          type="password"
-        />
-        <Input
-          formik={formik}
-          label="Confirm Password"
-          name="confirmPassword"
-          type="password"
-        />
+        <div className="passBox">
+          <Input
+            formik={formik}
+            label="Password"
+            name="password"
+            type="password"
+          />
+          <Input
+            formik={formik}
+            label="Confirm Password"
+            name="confirmPassword"
+            type="password"
+          />
+        </div>
         <button type="submit" disabled={!formik.isValid}>
           SignUp
         </button>
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <Link to={`/login?redirect=${redirect}`}>Alredy login?</Link>
+        <Link className="haveAccount" to={`/login?redirect=${redirect}`}>
+          Alredy have account?
+        </Link>
       </form>
     </div>
   );

@@ -16,7 +16,14 @@ const CartPage = () => {
   };
 
   if (cart.length == 0) {
-    return <h3>Cart Is Empty !</h3>;
+    return (
+      <>
+        <h3 className="emptyCart">Cart Is Empty !</h3>
+        <Link to="/" className="shoppingLink">
+          Go To Shopping{" "}
+        </Link>
+      </>
+    );
   }
 
   return (
