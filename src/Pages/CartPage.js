@@ -34,7 +34,7 @@ const CartPage = () => {
             <div className="addedProduct">
               <div>
                 <img src={item.image} />
-                <h1>{item.name}</h1>
+                <h2>{item.name}</h2>
                 <span>${item.price * item.quantity}</span>
               </div>
 

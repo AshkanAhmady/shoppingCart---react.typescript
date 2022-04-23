@@ -343,6 +343,10 @@ header nav ul li .number span {
   transition: 0.3s;
 }
 
+.cart article .addedProduct > div:first-child h2 {
+  font-size: 1.6rem;
+}
+
 .cart article .addedProduct .quantity > div:last-child {
   border-radius: 0 5px 5px 0;
   cursor: pointer;
@@ -521,6 +525,7 @@ h3.emptyCart {
   margin-top: 2px;
   border-radius: 3px;
   outline: none;
+  color: #fff;
 }
 
 .signup_form .formControll input:focus {
@@ -537,6 +542,12 @@ h3.emptyCart {
   color: #eee;
   padding: 2px 20px;
   border-radius: 3px;
+}
+
+.signup_form button:disabled {
+  background-color: rgb(180, 180, 180);
+  color: #eee;
+  cursor: not-allowed;
 }
 
 .signup_form .haveAccount,
@@ -561,4 +572,219 @@ h3.emptyCart {
   border-bottom: 1px solid #ccc;
   padding-bottom: 5px;
   margin-bottom: 10px;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  h1 {
+    font-size: 1.7rem !important;
+  }
+
+  h2,
+  h3,
+  h4 {
+    font-size: 1.1rem !important;
+  }
+
+  span,
+  p,
+  li,
+  a,
+  strong,
+  h5,
+  h5,
+  div {
+    font-size: 0.7rem !important;
+  }
+
+  body {
+    overflow: unset;
+  }
+
+  main {
+    padding: 10px 50px;
+    height: unset;
+    overflow: unset;
+  }
+
+  .productList {
+    grid-gap: 20px;
+    padding: 0;
+  }
+
+  .cart article {
+    max-height: unset;
+  }
+
+  .cart article .addedProduct > div:first-child {
+    min-width: unset;
+  }
+  .cart article .addedProduct > div:first-child h2 {
+    margin: 0 10px;
+  }
+
+  .cart article .addedProduct .quantity {
+    flex-direction: column;
+  }
+
+  .cart article .addedProduct .quantity > div {
+    width: 25px;
+    height: 25px;
+  }
+
+  .cart article .addedProduct .quantity > div:nth-child(2) {
+    border: 2px solid blueviolet;
+    border-top: none;
+    border-bottom: none;
+  }
+
+  .cart article .addedProduct .quantity > div:first-child {
+    border-radius: 5px 5px 0 0;
+  }
+
+  .cart article .addedProduct .quantity > div:last-child {
+    border-radius: 0 0 5px 5px;
+  }
+
+  .signup_form {
+    width: 100%;
+  }
+
+  .signup_form h1 {
+    text-align: start;
+  }
+
+  .signup_form .passBox {
+    flex-direction: column;
+  }
+
+  .signup_form .passBox .formControll {
+    width: 100%;
+  }
+}
+
+@media (max-width: 940px) {
+  .cart {
+    flex-direction: column;
+  }
+
+  .cart article,
+  .cart aside {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .cart article .addedProduct .quantity {
+    flex-direction: row;
+  }
+
+  .cart article .addedProduct .quantity > div:nth-child(2) {
+    border: 2px solid blueviolet;
+    border-left: none;
+    border-right: none;
+  }
+
+  .cart article .addedProduct .quantity > div:first-child {
+    border-radius: 5px 0 0 5px;
+  }
+
+  .cart article .addedProduct .quantity > div:last-child {
+    border-radius: 0 5px 5px 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .cart article .addedProduct .quantity {
+    flex-direction: column;
+  }
+
+  .cart article .addedProduct .quantity > div:nth-child(2) {
+    border: 2px solid blueviolet;
+    border-top: none;
+    border-bottom: none;
+  }
+
+  .cart article .addedProduct .quantity > div:first-child {
+    border-radius: 5px 5px 0 0;
+  }
+
+  .cart article .addedProduct .quantity > div:last-child {
+    border-radius: 0 0 5px 5px;
+  }
+
+  .checkout {
+    flex-direction: column;
+  }
+
+  .checkout article,
+  .checkout aside {
+    width: 100%;
+    margin: 10px 0;
+    height: unset !important;
+  }
+}
+
+@media (max-width: 640px) {
+  header {
+    padding: 20px;
+  }
+  main {
+    padding: 0 20px 20px 20px;
+  }
+
+  header nav ul li .icon {
+    margin-left: 5px;
+  }
+
+  .cart article .addedProduct > div:first-child {
+    margin-right: 10px;
+  }
+
+  .cart article .addedProduct > div img {
+    width: 80px;
+    height: auto;
+  }
+}
+
+@media (max-width: 530px) {
+  .cart article .addedProduct .description {
+    display: none;
+  }
+
+  .cart article .addedProduct > div:first-child {
+    justify-content: flex-start;
+  }
+
+  .cart article .addedProduct > div img {
+    width: 60px;
+  }
+
+  .cart article .addedProduct > div h2 {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 440px) {
+  body {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 370px) {
+  header .logo > div {
+    display: none;
+  }
+
+  header .logo h1 {
+    font-size: 1.6rem;
+  }
+
+  header ul {
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  header nav ul li .icon {
+    font-size: 19px;
+  }
 }
