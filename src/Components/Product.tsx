@@ -1,10 +1,10 @@
-import { HiPlusSm } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { useCart } from "../Context/Cart/CartProvider";
+import { CartInterface, ProductComponentProps } from "../Interfaces";
 import { checkInCart } from "../Util/checkInCart";
 
-const Product = ({ product, addProductHandler }) => {
-  const { cart } = useCart();
+const Product: React.FC<ProductComponentProps> = ({ product, addProductHandler }) => {
+  const { cart }: CartInterface = useCart();
   const discount = Math.round(
     (100 * (product.price - product.offPrice)) / product.price
   );
@@ -22,7 +22,7 @@ const Product = ({ product, addProductHandler }) => {
       )}
 
       <div className="imgBox">
-        <img src={product.image} />
+        <img alt="product" src={product.image} />
       </div>
       {discount > 0 && <span className="discount">{discount}% off</span>}
       <div className="details">

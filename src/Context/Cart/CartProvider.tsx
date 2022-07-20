@@ -1,15 +1,16 @@
 import { createContext, useContext, useReducer } from "react";
+import { CartInterface } from "../../Interfaces";
 import cartReducer from "./CartReducer";
 
-const initialState = {
+const initialState: CartInterface = {
   cart: [],
   total: 0,
 };
 
-const CartContext = createContext();
-const CartContextDispatcher = createContext();
+const CartContext = createContext<any>(null);
+const CartContextDispatcher = createContext<any>(null);
 
-const CartProvider = ({ children }) => {
+const CartProvider = ({ children }: any) => {
   const [cart, dispatch] = useReducer(cartReducer, initialState);
 
   return (

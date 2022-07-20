@@ -12,11 +12,12 @@ import {
 } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { UseAuth } from "../Context/Auth/AuthProvider";
+import { CartInterface } from "../Interfaces";
 
-const Navigation = ({ location }) => {
+const Navigation = ({ location }: any) => {
   const auth = UseAuth();
 
-  const { cart } = useCart();
+  const { cart }: CartInterface = useCart();
 
   return (
     <header>
@@ -28,7 +29,7 @@ const Navigation = ({ location }) => {
         <ul>
           <li>
             <NavLink to="/" exact={true}>
-              {location.pathname == "/" ? (
+              {location.pathname === "/" ? (
                 <RiHomeFill className="icon" />
               ) : (
                 <RiHomeLine className="icon" />
@@ -37,7 +38,7 @@ const Navigation = ({ location }) => {
           </li>
           <li>
             <NavLink to="/cart">
-              {location.pathname == "/cart" ? (
+              {location.pathname === "/cart" ? (
                 <RiShoppingCartFill className="icon" />
               ) : (
                 <RiShoppingCartLine className="icon" />
@@ -52,13 +53,13 @@ const Navigation = ({ location }) => {
           <li>
             <Link to={auth ? "/profile" : "/signup"}>
               {auth ? (
-                location.pathname == "/profile" ? (
+                location.pathname === "/profile" ? (
                   <RiUser3Fill className="icon" />
                 ) : (
                   <RiUser3Line className="icon" />
                 )
-              ) : location.pathname == "/login" ||
-                location.pathname == "/signup" ? (
+              ) : location.pathname === "/login" ||
+                location.pathname === "/signup" ? (
                 <RiLoginBoxFill className="icon" />
               ) : (
                 <RiLoginBoxLine className="icon" />

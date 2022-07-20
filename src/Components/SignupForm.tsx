@@ -3,9 +3,10 @@ import Input from "../Components/Common/Input";
 import * as yup from "yup";
 import { Link, withRouter } from "react-router-dom";
 import { signupUser } from "../Services/HttpRequestMethods";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { UseAuth, useAuthActions } from "../Context/Auth/AuthProvider";
 import { useQuery } from "../hooks/useQuery";
+import { AuthInterface, SignupValues } from "../Interfaces";
 
 const initialValues = {
   name: "",
@@ -15,14 +16,14 @@ const initialValues = {
   confirmPassword: "",
 };
 
-const SignupForm = ({ history }) => {
+const SignupForm = ({ history }: any) => {
   // use query => if user was in checkoutPage and dont loged in
   // he|she most login and redirect to checkoutPage
   // if (query == undefinde) => redirect = "/"
   const query = useQuery();
   const redirect = query.get("redirect") || "/";
   const [error, setError] = useState(null);
-  const setAuth = useAuthActions();
+  const setAuth: React.Dispatch<SetStateAction<AuthInterface | false>> = useAuthActions();
   const auth = UseAuth();
 
   // if we come to signupPage and we loged in, we push to redirect
@@ -30,9 +31,9 @@ const SignupForm = ({ history }) => {
     if (auth) history.push(redirect);
   }, [redirect, auth]);
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values: SignupValues) => {
     const { name, email, phoneNumber, password } = values;
-    const userDate = {
+    const userData: AuthInterface = {
       name,
       email,
       phoneNumber,
@@ -40,11 +41,12 @@ const SignupForm = ({ history }) => {
     };
 
     try {
-      const { data } = await signupUser(userDate);
+      // data :=> is the user information
+      const { data } = await signupUser(userData);
       setAuth(data);
       history.push(redirect);
       setError(null);
-    } catch (error) {
+    } catch (error: any) {
       if (error.response && error.response.data.message) {
         setError(error.response.data.message);
       }

@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
 import { UseAuth } from "../Context/Auth/AuthProvider";
 import { useCart } from "../Context/Cart/CartProvider";
+import { CartInterface, ProductInterface } from "../Interfaces";
 
 const CheckoutPage = () => {
   const auth = UseAuth();
-  const { cart, total } = useCart();
+  const { cart, total }: CartInterface = useCart();
 
   if (!cart.length)
     return (
       <Link to="/" className="shoppingLink">
-        Go To Shopping{" "}
+        Go To Shopping
       </Link>
     );
 
@@ -36,7 +37,7 @@ const CheckoutPage = () => {
         )}
       </article>
       <aside>
-        {cart.map((product) => (
+        {cart.map((product: ProductInterface) => (
           <div key={product.id}>
             <span>
               <strong>{product.name}</strong> * {product.quantity} :{" "}

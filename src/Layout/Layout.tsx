@@ -1,6 +1,6 @@
 import Navigation from "../Components/Navigation";
 
-const Layout = ({ children }) => {
+const Layout = ({ children }: any) => {
   return (
     <div className="layout">
       <Navigation />

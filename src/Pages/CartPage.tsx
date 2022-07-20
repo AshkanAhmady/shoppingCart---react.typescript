@@ -2,20 +2,21 @@ import { useCart, useCartActions } from "../Context/Cart/CartProvider";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { HiPlusSm, HiMinusSm, HiOutlineTrash } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { CartInterface, CartSummeryComponentProps, ProductInterface } from "../Interfaces";
 
 const CartPage = () => {
-  const { cart, total } = useCart();
+  const { cart, total }: CartInterface = useCart();
   const dispatch = useCartActions();
 
-  const incrementHandler = (id) => {
+  const incrementHandler = (id: number) => {
     dispatch({ type: "INCREMENT_QUANTITY", payload: id });
   };
 
-  const decrementHandler = (id) => {
+  const decrementHandler = (id: number) => {
     dispatch({ type: "DECREMENT_QUANTITY", payload: id });
   };
 
-  if (cart.length == 0) {
+  if (cart.length === 0) {
     return (
       <>
         <h3 className="emptyCart">Cart Is Empty !</h3>
@@ -29,13 +30,13 @@ const CartPage = () => {
   return (
     <section className="cart">
       <article>
-        {cart.map((item) => (
+        {cart.map((item: ProductInterface) => (
           <div className="singleProduct" key={item.id}>
             <div className="addedProduct">
               <div>
-                <img src={item.image} />
+                <img alt="productImage" src={item.image} />
                 <h2>{item.name}</h2>
-                <span>${item.price * item.quantity}</span>
+                <span>${item.price * item.quantity!}</span>
               </div>
 
               <div className="quantity">
@@ -47,15 +48,15 @@ const CartPage = () => {
                 </div>
                 <div className="number">{item.quantity}</div>
                 <div
-                  className={`iconBox ${item.quantity == 1 && "trash"}`}
+                  className={`iconBox ${item.quantity === 1 && "trash"}`}
                   onClick={() => decrementHandler(item.id)}
                 >
-                  {item.quantity == 1 ? <HiOutlineTrash /> : <HiMinusSm />}
+                  {item.quantity === 1 ? <HiOutlineTrash /> : <HiMinusSm />}
                 </div>
               </div>
               <div className="description">
                 <ul>
-                  {item.description.map((desc, index) => (
+                  {item.description.map((desc: { support: string; }, index: number) => (
                     <li key={index}>
                       <FaRegCheckCircle className="icon" />
                       {desc.support}
@@ -75,13 +76,13 @@ const CartPage = () => {
 
 export default CartPage;
 
-const CartSummery = ({ total, cart }) => {
+const CartSummery: React.FC<CartSummeryComponentProps> = ({ total, cart }) => {
   const originalPrice = cart.length
     ? cart.reduce(
         // accumulator => save preve data in itself
         // current => the current member of array that progress
-        (accumulator, current) =>
-          accumulator + current.quantity * current.price,
+        (accumulator:number, current: ProductInterface) =>
+          accumulator + current.quantity! * current.price,
         // 0 => is first value of accumulator
         0
       )

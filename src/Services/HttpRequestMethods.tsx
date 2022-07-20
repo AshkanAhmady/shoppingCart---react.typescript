@@ -1,12 +1,13 @@
 import axios from "axios";
+import { AuthInterface, LoginValues } from "../Interfaces";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
-export const signupUser = (data) => {
+export const signupUser = (data: AuthInterface) => {
   return axios.post("/user/register", data);
 };
 
-export const loginUser = (data) => {
+export const loginUser = (data: LoginValues) => {
   return axios.post("/user/login", data);
 };
 

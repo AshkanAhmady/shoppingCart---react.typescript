@@ -1,11 +1,12 @@
 import { toast } from "react-toastify";
+import { CartReducerActionProps, CartReducerStateProps, ProductInterface } from "../../Interfaces";
 
-const cartReducer = (state, action) => {
+const cartReducer = (state: CartReducerStateProps, action: CartReducerActionProps) => {
   switch (action.type) {
     case "ADD_TO_CART": {
       let updatedCart = [...state.cart];
       let updatedItemIndex = updatedCart.findIndex(
-        (item) => item.id == action.payload.id
+        (item) => item.id === action.payload.id
       );
 
       // if this product wasnt in the cart
@@ -34,7 +35,7 @@ const cartReducer = (state, action) => {
     case "INCREMENT_QUANTITY": {
       let updatedCart = [...state.cart];
       let updatedItemIndex = state.cart.findIndex(
-        (item) => item.id === action.payload
+        (item: ProductInterface) => item.id === action.payload
       );
       let updatedItem = updatedCart[updatedItemIndex];
 
@@ -48,13 +49,13 @@ const cartReducer = (state, action) => {
     case "DECREMENT_QUANTITY": {
       let updatedCart = [...state.cart];
       let updatedItemIndex = state.cart.findIndex(
-        (item) => item.id === action.payload
+        (item: ProductInterface) => item.id === action.payload
       );
       let updatedItem = updatedCart[updatedItemIndex];
 
       updatedItem.quantity--;
-      if (updatedItem.quantity == 0) {
-        updatedCart = updatedCart.filter((item) => item.id != action.payload);
+      if (updatedItem.quantity === 0) {
+        updatedCart = updatedCart.filter((item) => item.id !== action.payload);
         return {
           ...state,
           cart: updatedCart,

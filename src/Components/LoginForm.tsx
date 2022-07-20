@@ -6,13 +6,14 @@ import { loginUser } from "../Services/HttpRequestMethods";
 import { useEffect, useState } from "react";
 import { UseAuth, useAuthActions } from "../Context/Auth/AuthProvider";
 import { useQuery } from "../hooks/useQuery";
+import { LoginValues } from "../Interfaces";
 
 const initialValues = {
   email: "",
   password: "",
 };
 
-const LoginForm = ({ history }) => {
+const LoginForm = ({ history }: any) => {
   // use query => if user was in checkoutPage and dont loged in
   // he|she most login and redirect to checkoutPage
   const query = useQuery();
@@ -26,15 +27,16 @@ const LoginForm = ({ history }) => {
     if (auth) history.push(redirect);
   }, [redirect, auth]);
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values: LoginValues) => {
     try {
       const { data } = await loginUser(values);
       setAuth(data);
       setError(null);
       history.push(redirect);
-    } catch (error) {
+    } catch (error: any) {
       if (error.response && error.response.data.message) {
         setError(error.response.data.message);
+        console.log(error)
       }
     }
   };
@@ -68,7 +70,7 @@ const LoginForm = ({ history }) => {
         <button type="submit" disabled={!formik.isValid}>
           Login
         </button>
-        {error && <p>{error}</p>}
+        {error && <p className="loginErrorText">{error}</p>}
         <Link className="notSignUp" to={`/signup?redirect=${redirect}`}>
           Not Signup Yet?
         </Link>

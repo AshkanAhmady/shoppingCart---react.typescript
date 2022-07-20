@@ -1,6 +1,9 @@
 // controlled component
+
+import { InputComponentProps } from "../../Interfaces";
+
 // type = "text" ==> default parameter
-const Input = ({ label, name, formik, type = "text" }) => {
+const Input: React.FC<InputComponentProps> = ({ label, name, formik, type = "text" }) => {
   return (
     <div className="formControll">
       <label htmlFor={name}>{label}:</label>
