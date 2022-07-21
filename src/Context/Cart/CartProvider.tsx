@@ -8,20 +8,16 @@ const initialState: CartInterface = {
 };
 
 const CartContext = createContext<any>(null);
-const CartContextDispatcher = createContext<any>(null);
 
 const CartProvider = ({ children }: any) => {
   const [cart, dispatch] = useReducer(cartReducer, initialState);
 
   return (
-    <CartContext.Provider value={cart}>
-      <CartContextDispatcher.Provider value={dispatch}>
-        {children}
-      </CartContextDispatcher.Provider>
+    <CartContext.Provider value={[cart, dispatch]}>
+      {children}
     </CartContext.Provider>
   );
 };
 
 export default CartProvider;
 export const useCart = () => useContext(CartContext);
-export const useCartActions = () => useContext(CartContextDispatcher);

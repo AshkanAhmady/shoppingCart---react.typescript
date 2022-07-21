@@ -12,12 +12,12 @@ import {
 } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { UseAuth } from "../Context/Auth/AuthProvider";
-import { CartInterface } from "../Interfaces";
 
 const Navigation = ({ location }: any) => {
-  const auth = UseAuth();
-
-  const { cart }: CartInterface = useCart();
+  // the values in (useAuth) => [auth, useAuth]
+  const {auth} = UseAuth();
+  // the values in (useCart) => [{cart, total}, dispatch]
+  const [{ cart }] = useCart();
 
   return (
     <header>

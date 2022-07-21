@@ -1,12 +1,11 @@
-import { useCart, useCartActions } from "../Context/Cart/CartProvider";
+import { useCart } from "../Context/Cart/CartProvider";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { HiPlusSm, HiMinusSm, HiOutlineTrash } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import { CartInterface, CartSummeryComponentProps, ProductInterface } from "../Interfaces";
+import { CartSummeryComponentProps, ProductInterface } from "../Interfaces";
 
 const CartPage = () => {
-  const { cart, total }: CartInterface = useCart();
-  const dispatch = useCartActions();
+  const [{ cart, total }, dispatch] = useCart();
 
   const incrementHandler = (id: number) => {
     dispatch({ type: "INCREMENT_QUANTITY", payload: id });

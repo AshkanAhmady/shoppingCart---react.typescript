@@ -1,9 +1,11 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { AuthInterface } from "../../Interfaces";
+import { createContext, useContext, useEffect, useState } from "react";
 
+// interface AuthContextInterface {
+//   auth: AuthInterface;
+//   setAuth: React.Dispatch<React.SetStateAction<AuthInterface | null>>
+// }
 
-const AuthContext = createContext<AuthInterface | null>(null);
-const AuthContextDispatcher = createContext<any>(null);
+const AuthContext = createContext<any>(null);
 
 const AuthProvider = ({ children }: any) => {
   const [auth, setAuth] = useState(null);
@@ -18,14 +20,11 @@ const AuthProvider = ({ children }: any) => {
   }, [auth]);
 
   return (
-    <AuthContext.Provider value={auth}>
-      <AuthContextDispatcher.Provider value={setAuth}>
-        {children}
-      </AuthContextDispatcher.Provider>
+    <AuthContext.Provider value={{auth, setAuth}}>
+      {children}
     </AuthContext.Provider>
   );
 };
 
 export default AuthProvider;
 export const UseAuth = () => useContext(AuthContext);
-export const useAuthActions = () => useContext(AuthContextDispatcher);

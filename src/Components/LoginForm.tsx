@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { Link, withRouter } from "react-router-dom";
 import { loginUser } from "../Services/HttpRequestMethods";
 import { useEffect, useState } from "react";
-import { UseAuth, useAuthActions } from "../Context/Auth/AuthProvider";
+import { UseAuth } from "../Context/Auth/AuthProvider";
 import { useQuery } from "../hooks/useQuery";
 import { LoginValues } from "../Interfaces";
 
@@ -19,8 +19,7 @@ const LoginForm = ({ history }: any) => {
   const query = useQuery();
   const redirect = query.get("redirect") || "/";
   const [error, setError] = useState(null);
-  const setAuth = useAuthActions();
-  const auth = UseAuth();
+  const {auth,setAuth} = UseAuth();
 
   // if we come to loginPage and we loged in, we push to redirect
   useEffect(() => {

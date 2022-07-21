@@ -1,10 +1,10 @@
 import * as data from "../data";
 import Product from "../Components/Product";
-import { useCartActions } from "../Context/Cart/CartProvider";
+import { useCart } from "../Context/Cart/CartProvider";
 import { ProductInterface } from "../Interfaces";
 
 const HomePage = () => {
-  const dispatch = useCartActions();
+  const [_, dispatch] = useCart();
 
   const addProductHandler = (product: ProductInterface) => {
     dispatch({ type: "ADD_TO_CART", payload: product });

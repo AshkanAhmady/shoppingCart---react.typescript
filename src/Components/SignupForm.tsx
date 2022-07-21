@@ -3,8 +3,8 @@ import Input from "../Components/Common/Input";
 import * as yup from "yup";
 import { Link, withRouter } from "react-router-dom";
 import { signupUser } from "../Services/HttpRequestMethods";
-import { SetStateAction, useEffect, useState } from "react";
-import { UseAuth, useAuthActions } from "../Context/Auth/AuthProvider";
+import { useEffect, useState } from "react";
+import { UseAuth } from "../Context/Auth/AuthProvider";
 import { useQuery } from "../hooks/useQuery";
 import { AuthInterface, SignupValues } from "../Interfaces";
 
@@ -23,8 +23,7 @@ const SignupForm = ({ history }: any) => {
   const query = useQuery();
   const redirect = query.get("redirect") || "/";
   const [error, setError] = useState(null);
-  const setAuth: React.Dispatch<SetStateAction<AuthInterface | false>> = useAuthActions();
-  const auth = UseAuth();
+  const {auth,setAuth} = UseAuth();
 
   // if we come to signupPage and we loged in, we push to redirect
   useEffect(() => {

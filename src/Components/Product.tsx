@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../Context/Cart/CartProvider";
-import { CartInterface, ProductComponentProps } from "../Interfaces";
+import { ProductComponentProps } from "../Interfaces";
 import { checkInCart } from "../Util/checkInCart";
 
 const Product: React.FC<ProductComponentProps> = ({ product, addProductHandler }) => {
-  const { cart }: CartInterface = useCart();
+  const [{ cart }] = useCart();
   const discount = Math.round(
     (100 * (product.price - product.offPrice)) / product.price
   );
